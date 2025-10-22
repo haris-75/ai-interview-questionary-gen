@@ -25,13 +25,18 @@ span {
   --color-muted: #6b7a83;
   --color-border: #e1e8ec;
 
-  /* Perplexity-style accent */
+  /* Accent */
   --color-accent: #20808d;
   --color-onaccent: #ffffff;
   --color-ring: var(--color-accent);
+
+  /* Error colors */
+  --color-error-bg: #fef2f2;
+  --color-error-border: #fca5a5;
+  --color-error-text: #b91c1c;
+  --color-error-icon: #ef4444;
 }
 
-/* Dark — inky teal-blacks like Perplexity */
 @layer theme {
   :root[data-theme="dark"] {
     --color-bg: #040e0e;
@@ -44,5 +49,11 @@ span {
     --color-accent: #20808d;
     --color-onaccent: #ffffff;
     --color-ring: var(--color-accent);
+
+    /* Error (dark mode variants) */
+    --color-error-bg: #1a0b0b;
+    --color-error-border: #7f1d1d;
+    --color-error-text: #fca5a5;
+    --color-error-icon: #f87171;
   }
 }
