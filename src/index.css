@@ -35,6 +35,9 @@ span {
   --color-error-border: #fca5a5;
   --color-error-text: #b91c1c;
   --color-error-icon: #ef4444;
+
+  --color-status-view-bg: #d1fae5; /* light green */
+  --color-status-view-text: #065f46;
 }
 
 @layer theme {
@@ -55,5 +58,8 @@ span {
     --color-error-border: #7f1d1d;
     --color-error-text: #fca5a5;
     --color-error-icon: #f87171;
+
+    --color-status-view-bg: #064e3b;
+    --color-status-view-text: #a7f3d0;
   }
 }
