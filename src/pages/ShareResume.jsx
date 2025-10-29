@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import ROUTES from "../routes";
 import { generateFromResume } from "../api";
 import ErrorAlert from "../components/ErrorAlert";
+import toast from "react-hot-toast";
+import { sampleResponseGenerateFormDetails } from "../constants";
 
 export default function ShareResume() {
   const [candidateName, setCandidateName] = useState("");
@@ -19,25 +21,25 @@ export default function ShareResume() {
     setLoading(true);
 
     try {
-      const data = await generateFromResume(file);
+      // TODO uncomment when we will use API
+      // const data = await generateFromResume(file);
 
-      console.log("API Response:", data);
+      const data = sampleResponseGenerateFormDetails;
+      toast.success("Questions generated successfully!");
 
-      // You can optionally store data in state management or localStorage before navigating
-      // store data as per required
-      sessionStorage.setItem(
-        "generatedQuestions",
-        JSON.stringify(data.questions)
-      );
-      sessionStorage.setItem("generationMeta", JSON.stringify(data.meta));
-      sessionStorage.setItem("candidateName", candidateName);
-
-      navigate(`/${ROUTES.INTERVIEW_QUESTIONS}`);
+      navigate(`/${ROUTES.INTERVIEW_QUESTIONS}`, {
+        state: {
+          questions: data?.questions,
+          candidateName,
+          source: data.meta.source,
+        },
+      });
     } catch (err) {
       console.error("Upload error:", err);
       setError(
         err.message || "Failed to generate questions. Please try again."
       );
+      toast.error("Upload failed. Please try again.");
     } finally {
       setLoading(false);
     }

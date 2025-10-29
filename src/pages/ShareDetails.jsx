@@ -78,10 +78,10 @@ export default function ShareDetails() {
 
     try {
       const payload = buildPayload();
-      // const data = await generateFromDetails(payload);
+
       // TODO uncomment when we will use API
-      // For now, we use sample response
-      // const data = sampleResponseGenerateFormDetails;
+      // const data = await generateFromDetails(payload);
+
       const data = sampleResponseGenerateFormDetails;
       navigate(`/${ROUTES.INTERVIEW_QUESTIONS}`, {
         state: {
