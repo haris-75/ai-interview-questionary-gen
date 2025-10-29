@@ -1,19 +1,45 @@
 import { useState } from "react";
-import { FileText } from "lucide-react";
+import { FileText, Loader2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../routes";
+import { generateFromResume } from "../api";
+import ErrorAlert from "../components/ErrorAlert";
 
 export default function ShareResume() {
   const [candidateName, setCandidateName] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  const handleFileUpload = (e) => {
+  const handleFileUpload = async (e) => {
     const file = e.target.files[0];
-    if (file) {
-      setTimeout(() => {
-        console.log("Form Submitted");
-        navigate(`/${ROUTES.INTERVIEW_QUESTIONS}`);
-      }, 1000);
+    if (!file) return;
+
+    setError(null);
+    setLoading(true);
+
+    try {
+      const data = await generateFromResume(file);
+
+      console.log("API Response:", data);
+
+      // You can optionally store data in state management or localStorage before navigating
+      // store data as per required
+      sessionStorage.setItem(
+        "generatedQuestions",
+        JSON.stringify(data.questions)
+      );
+      sessionStorage.setItem("generationMeta", JSON.stringify(data.meta));
+      sessionStorage.setItem("candidateName", candidateName);
+
+      navigate(`/${ROUTES.INTERVIEW_QUESTIONS}`);
+    } catch (err) {
+      console.error("Upload error:", err);
+      setError(
+        err.message || "Failed to generate questions. Please try again."
+      );
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -34,25 +60,45 @@ export default function ShareResume() {
           </p>
         </div>
 
-        <div className="border-4 border-dashed rounded-xl p-12 text-center transition-colors border-border hover:border-accent/70">
+        {error && (
+          <div className="mb-6">
+            <ErrorAlert message={error} />
+          </div>
+        )}
+
+        <div className="border-4 border-dashed rounded-xl p-12 text-center transition-colors border-border hover:border-accent/70 relative">
           <input
             type="file"
             id="resume-upload"
             accept=".pdf,.doc,.docx"
             onChange={handleFileUpload}
             className="hidden"
+            disabled={loading}
           />
-          <label htmlFor="resume-upload" className="cursor-pointer">
+          <label
+            htmlFor="resume-upload"
+            className={`cursor-pointer block ${
+              loading ? "opacity-60 pointer-events-none" : ""
+            }`}
+          >
             <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4 bg-accent/10">
-              <FileText className="w-10 h-10 text-accent" />
+              {loading ? (
+                <Loader2 className="w-10 h-10 text-accent animate-spin" />
+              ) : (
+                <FileText className="w-10 h-10 text-accent" />
+              )}
             </div>
             <h3 className="text-xl font-semibold mb-2 text-fg">
-              Drop your resume here
+              {loading ? "Analyzing Resume..." : "Drop your resume here"}
             </h3>
-            <p className="mb-4 text-muted">or click to browse</p>
-            <p className="text-sm text-muted">
-              Supports PDF, DOC, DOCX (Max 5MB)
-            </p>
+            {!loading && (
+              <>
+                <p className="mb-4 text-muted">or click to browse</p>
+                <p className="text-sm text-muted">
+                  Supports PDF, DOC, DOCX (Max 5MB)
+                </p>
+              </>
+            )}
           </label>
         </div>
 
@@ -66,6 +112,7 @@ export default function ShareResume() {
             onChange={(e) => setCandidateName(e.target.value)}
             placeholder="Enter candidate name"
             className="w-full px-4 py-3 border-2 rounded-lg bg-surface border-border text-fg placeholder-muted focus:outline-none focus:border-accent focus:ring-2 focus:ring-ring"
+            disabled={loading}
           />
         </div>
       </div>

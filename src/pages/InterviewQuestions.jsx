@@ -1,21 +1,41 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { User, Briefcase, Download, Share2 } from "lucide-react";
-import { sampleQuestions } from "../constants";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function InterviewQuestions() {
-  const [feedback, setFeedback] = useState({});
+  const location = useLocation();
   const navigate = useNavigate();
+  const [feedback, setFeedback] = useState({});
+  const [questions, setQuestions] = useState([]);
 
-  const updateFeedback = (questionId, field, value) => {
+  const { state } = location;
+  const { candidateName, role, level } = state;
+
+  useEffect(() => {
+    if (location.state && location.state.questions) {
+      setQuestions(location.state.questions || []);
+    } else {
+      console.warn("No questions found in location.state");
+    }
+  }, [location.state]);
+
+  const updateFeedback = (id, key, value) => {
     setFeedback((prev) => ({
       ...prev,
-      [questionId]: {
-        ...prev[questionId],
-        [field]: value,
+      [id]: {
+        ...prev[id],
+        [key]: value,
       },
     }));
   };
+
+  if (questions.length === 0) {
+    return (
+      <div className="text-center text-muted mt-10">
+        No questions available.
+      </div>
+    );
+  }
 
   const exportToPDF = () => {
     alert(
@@ -46,16 +66,18 @@ export default function InterviewQuestions() {
             <div className="flex flex-wrap gap-3 text-sm">
               <span className="px-3 py-1 rounded-full font-semibold bg-accent/10 text-accent border border-accent/20">
                 <Briefcase className="w-4 h-4 inline mr-1" />
-                {"Senior React Developer"}
+                {role}
               </span>
               <span className="px-3 py-1 rounded-full font-semibold bg-elevated text-fg border border-border">
-                {"Mid/Senior Level"}
+                {level}
               </span>
 
-              <span className="px-3 py-1 rounded-full font-semibold bg-elevated text-fg border border-border">
-                <User className="w-4 h-4 inline mr-1" />
-                {"John Doe"}
-              </span>
+              {candidateName && (
+                <span className="px-3 py-1 rounded-full font-semibold bg-elevated text-fg border border-border">
+                  <User className="w-4 h-4 inline mr-1" />
+                  {candidateName}
+                </span>
+              )}
             </div>
           </div>
           <div className="flex gap-3">
@@ -78,7 +100,7 @@ export default function InterviewQuestions() {
       </div>
 
       <div className="space-y-6">
-        {sampleQuestions.map((q, idx) => (
+        {questions.map((q, idx) => (
           <div
             key={q.id}
             className="rounded-xl shadow-lg p-6 bg-surface border border-border"
