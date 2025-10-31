@@ -7,9 +7,7 @@ export default function Home() {
   return (
     <div className="max-w-4xl w-full">
       <div className="text-center mb-12">
-        <h1 className="text-5xl font-bold mb-4 text-fg">
-          Interview Question Generator
-        </h1>
+        <h1 className="text-6xl font-bold mb-2 text-fg">/interro-ai</h1>
         <p className="text-xl text-muted">
           Generate role specific interview questions with scoring rubrics
         </p>
