@@ -11,6 +11,7 @@ import {
 } from "../constants";
 import ErrorAlert from "../components/ErrorAlert";
 import FormField from "../components/FormField";
+import toast from "react-hot-toast";
 
 export default function ShareDetails() {
   const navigate = useNavigate();
@@ -76,29 +77,50 @@ export default function ShareDetails() {
     setLoading(true);
     setApiError(null);
 
+    // TODO: Remove this mock implementation and uncomment when we will use API
     try {
-      const payload = buildPayload();
-
-      // TODO uncomment when we will use API
-      // const data = await generateFromDetails(payload);
-
       const data = sampleResponseGenerateFormDetails;
-      navigate(`/${ROUTES.INTERVIEW_QUESTIONS}`, {
-        state: {
-          questions: data?.questions,
-          candidateName: formData.candidateName,
-          role: formData.role,
-          level: formData.level,
-        },
-      });
+
+      setTimeout(() => {
+        toast.success("Questions generated successfully!");
+        navigate(`/${ROUTES.INTERVIEW_QUESTIONS}`, {
+          state: {
+            questions: data?.questions,
+            candidateName: formData.candidateName,
+            role: formData.role,
+            level: formData.level,
+          },
+        });
+        setLoading(false);
+      }, 1000);
     } catch (err) {
       console.error("Failed to generate questions:", err);
       setApiError(
         err.message || "Failed to generate questions. Please try again."
       );
-    } finally {
-      setLoading(false);
     }
+
+    // TODO: Uncomment when we will use API
+    // try {
+    //   const payload = buildPayload();
+    //   const data = await generateFromDetails(payload);
+    // toast.success("Questions generated successfully!");
+    //   navigate(`/${ROUTES.INTERVIEW_QUESTIONS}`, {
+    //     state: {
+    //       questions: data?.questions,
+    //       candidateName: formData.candidateName,
+    //       role: formData.role,
+    //       level: formData.level,
+    //     },
+    //   });
+    // } catch (err) {
+    //   console.error("Failed to generate questions:", err);
+    //   setApiError(
+    //     err.message || "Failed to generate questions. Please try again."
+    //   );
+    // } finally {
+    //   setLoading(false);
+    // }
   };
 
   return (

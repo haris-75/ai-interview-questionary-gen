@@ -20,29 +20,48 @@ export default function ShareResume() {
     setError(null);
     setLoading(true);
 
+    // TODO: Remove this mock implementation and uncomment the actual API call
     try {
-      // TODO uncomment when we will use API
-      // const data = await generateFromResume(file);
-
       const data = sampleResponseGenerateFormDetails;
-      toast.success("Questions generated successfully!");
-
-      navigate(`/${ROUTES.INTERVIEW_QUESTIONS}`, {
-        state: {
-          questions: data?.questions,
-          candidateName,
-          source: data.meta.source,
-        },
-      });
+      setTimeout(() => {
+        navigate(`/${ROUTES.INTERVIEW_QUESTIONS}`, {
+          state: {
+            questions: data?.questions,
+            candidateName,
+            source: data.meta.source,
+          },
+        });
+        toast.success("Questions generated successfully!");
+        setLoading(false);
+      }, 1000);
     } catch (err) {
       console.error("Upload error:", err);
       setError(
         err.message || "Failed to generate questions. Please try again."
       );
       toast.error("Upload failed. Please try again.");
-    } finally {
-      setLoading(false);
     }
+
+    //TODO: Uncomment this block to enable actual API call
+    //   try {
+    //     const data = await generateFromResume(file);
+    //     toast.success("Questions generated successfully!");
+    //     navigate(`/${ROUTES.INTERVIEW_QUESTIONS}`, {
+    //       state: {
+    //         questions: data?.questions,
+    //         candidateName,
+    //         source: data.meta.source,
+    //       },
+    //     });
+    //   } catch (err) {
+    //     console.error("Upload error:", err);
+    //     setError(
+    //       err.message || "Failed to generate questions. Please try again."
+    //     );
+    //     toast.error("Upload failed. Please try again.");
+    //   } finally {
+    //     setLoading(false);
+    //   }
   };
 
   return (
