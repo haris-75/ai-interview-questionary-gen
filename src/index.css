@@ -36,8 +36,10 @@ span {
   --color-error-text: #b91c1c;
   --color-error-icon: #ef4444;
 
-  --color-status-view-bg: #d1fae5; /* light green */
+  --color-status-view-bg: #d1fae5;
   --color-status-view-text: #065f46;
+
+  --color-main: #ffffffe6;
 }
 
 @layer theme {
@@ -61,5 +63,72 @@ span {
 
     --color-status-view-bg: #064e3b;
     --color-status-view-text: #a7f3d0;
+
+    --color-main: #000000e6;
   }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}
+
+@keyframes loading-bar {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.6s ease-out;
+}
+
+.animate-shake {
+  animation: shake 0.3s ease-in-out;
+}
+
+.animate-loading-bar {
+  animation: loading-bar 1.5s ease-in-out infinite;
 }

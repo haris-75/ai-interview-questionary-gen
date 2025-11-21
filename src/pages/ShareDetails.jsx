@@ -83,7 +83,7 @@ export default function ShareDetails() {
 
       setTimeout(() => {
         toast.success("Questions generated successfully!");
-        navigate(`/${ROUTES.INTERVIEW_QUESTIONS}`, {
+        navigate(`/${ROUTES.APP}/${ROUTES.INTERVIEW_QUESTIONS}`, {
           state: {
             questions: data?.questions,
             candidateName: formData.candidateName,

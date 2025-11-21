@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import { ThemeContext } from "./ThemeContext";
 
-export default function useTheme() {
+export function ThemeProvider({ children }) {
   const [theme, setTheme] = useState("dark");
   const isDark = theme === "dark";
   const toggleTheme = () => {
@@ -20,5 +21,10 @@ export default function useTheme() {
     )
       setTheme("dark");
   }, []);
-  return { toggleTheme, theme, isDark };
+
+  return (
+    <ThemeContext.Provider value={{ toggleTheme, isDark }}>
+      {children}
+    </ThemeContext.Provider>
+  );
 }

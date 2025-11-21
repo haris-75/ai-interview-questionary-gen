@@ -24,7 +24,7 @@ export default function ShareResume() {
     try {
       const data = sampleResponseGenerateFormDetails;
       setTimeout(() => {
-        navigate(`/${ROUTES.INTERVIEW_QUESTIONS}`, {
+        navigate(`/${ROUTES.APP}/${ROUTES.INTERVIEW_QUESTIONS}`, {
           state: {
             questions: data?.questions,
             candidateName,
