@@ -1,4 +1,3 @@
-// TODO: Needs Refactoring
 import { Menu, Sparkles, X } from "lucide-react";
 
 import ThemeToggle from "./ThemeToggle";
@@ -6,10 +5,11 @@ import { useNavigate } from "react-router-dom";
 import ROUTES from "../routes";
 import { useAuth } from "../auth/AuthContext";
 import { useState } from "react";
+import { getUserDetails } from "../utils";
 
 export default function Navbar() {
   const navigate = useNavigate();
-  const { isAuthenticated, user, logout } = useAuth();
+  const { isAuthenticated, logout } = useAuth();
 
   const handleGetStarted = () => {
     navigate(`/${ROUTES.APP}`);
@@ -22,9 +22,10 @@ export default function Navbar() {
     }, 100);
   };
 
-  const displayName = user?.name || "Alex";
+  const displayName = getUserDetails()?.name;
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const toggleMobileMenu = () => setMobileMenuOpen((prev) => !prev);
 
   return (
     <header className="z-50 border-b border-border backdrop-blur-sm sticky top-0 w-full bg-bg">
@@ -70,7 +71,7 @@ export default function Navbar() {
           <div className="flex items-center gap-3 sm:hidden">
             {ThemeToggle && <ThemeToggle />}
             <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              onClick={toggleMobileMenu}
               className="p-2 rounded-lg hover:bg-surface transition-colors"
               aria-label="Toggle menu"
             >

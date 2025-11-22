@@ -39,7 +39,7 @@ export default function SignIn() {
   const { login } = useAuth();
 
   const googleLogin = useGoogleLogin({
-    flow: "auth-code", // we want an auth code to exchange on backend
+    flow: "auth-code",
     onSuccess: async (codeResponse) => {
       setError(null);
       setLoading(true);

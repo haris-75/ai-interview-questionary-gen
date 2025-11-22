@@ -1,4 +1,13 @@
-import { History, Upload, User } from "lucide-react";
+import {
+  Download,
+  Eye,
+  FileText,
+  History,
+  Share2,
+  Sparkles,
+  Upload,
+  User,
+} from "lucide-react";
 import ROUTES from "./routes";
 
 export const sampleResponseGenerateFormDetails = {
@@ -277,4 +286,49 @@ export const NAV_ITEMS = [
     icon: History,
     to: `/${ROUTES.APP}/${ROUTES.HISTORY}`,
   },
+];
+
+export const HOME_FEATURES = [
+  {
+    icon: FileText,
+    title: "Resume-Based Questions",
+    description:
+      "Upload a resume and instantly generate tailored interview questions based on the candidate's experience and skills.",
+    color: "accent",
+  },
+  {
+    icon: Sparkles,
+    title: "Custom Criteria",
+    description:
+      "Generate questions using specific metrics: role, experience level, required skills, and years of experience.",
+    color: "accent",
+  },
+  {
+    icon: Download,
+    title: "Export as PDF",
+    description:
+      "Save generated questions with scoring rubrics as professional PDFs for easy distribution and record-keeping.",
+    color: "accent",
+  },
+  {
+    icon: Eye,
+    title: "View Answers",
+    description:
+      "Access sample answers and scoring guidelines to help evaluate candidate responses effectively.",
+    color: "accent",
+  },
+  {
+    icon: Share2,
+    title: "Share Questions",
+    description:
+      "Generate shareable links to collaborate with your hiring team and streamline the interview process.",
+    color: "accent",
+  },
+];
+
+export const HOME_BENEFITS = [
+  "AI-powered question generation",
+  "Role-specific scoring rubrics",
+  "Save hours of prep time",
+  "Standardized interview process",
 ];

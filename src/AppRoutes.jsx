@@ -13,32 +13,12 @@ import AppShellLayout from "./pages/AppShellLayout";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import Layout2 from "./components/Layout2";
 import History from "./pages/History";
-
-const Layout = ({ children }) => {
-  return (
-    <div>
-      <Navbar />
-      <div className="min-h-[calc(100vh-202px)] bg-gradient-to-br from-bg to-elevated flex items-center justify-center p-4 transition-colors duration-300 font-sans">
-        {children}
-      </div>
-      <Footer />
-    </div>
-  );
-};
 
 export default function AppRoutes() {
   return (
     <Routes>
-      <Route
-        path={ROUTES.HOME}
-        element={
-          <Layout>
-            <Home />
-          </Layout>
-        }
-      />
+      <Route path={ROUTES.HOME} element={<Home />} />
       <Route path={`/${ROUTES.SIGNIN}`} element={<SignIn />} />
 
       <Route element={<ProtectedRoute />}>
