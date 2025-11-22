@@ -1,3 +1,6 @@
+import { History, Upload, User } from "lucide-react";
+import ROUTES from "./routes";
+
 export const sampleResponseGenerateFormDetails = {
   questions: [
     {
@@ -252,5 +255,26 @@ export const FORM_FIELDS = [
     label: "Candidate Name",
     type: "text",
     placeholder: "e.g., John Doe",
+  },
+];
+
+export const NAV_ITEMS = [
+  {
+    key: "resume",
+    label: "Generate via resume",
+    icon: Upload,
+    to: `/${ROUTES.APP}/${ROUTES.SHARE_RESUME}`,
+  },
+  {
+    key: "details",
+    label: "Share details",
+    icon: User,
+    to: `/${ROUTES.APP}/${ROUTES.SHARE_DETAILS}`,
+  },
+  {
+    key: "history",
+    label: "See history",
+    icon: History,
+    to: `/${ROUTES.APP}/${ROUTES.HISTORY}`,
   },
 ];

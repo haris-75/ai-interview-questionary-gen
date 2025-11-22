@@ -41,13 +41,7 @@ export default function AppRoutes() {
       />
       <Route path={`/${ROUTES.SIGNIN}`} element={<SignIn />} />
 
-      <Route
-        element={
-          <Layout2>
-            <ProtectedRoute />
-          </Layout2>
-        }
-      >
+      <Route element={<ProtectedRoute />}>
         <Route path={`/${ROUTES.APP}`} element={<AppShellLayout />}>
           {/* /app */}
           <Route index element={<InterroApp />} />

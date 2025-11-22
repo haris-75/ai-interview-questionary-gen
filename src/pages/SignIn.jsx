@@ -5,6 +5,8 @@ import HomeHeader from "../components/HomeHeader";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../routes";
 import { useAuth } from "../auth/AuthContext";
+import { googleSignInHandler } from "../api";
+import { useGoogleLogin } from "@react-oauth/google";
 
 function GoogleLogo() {
   return (
@@ -36,20 +38,29 @@ export default function SignIn() {
   const navigate = useNavigate();
   const { login } = useAuth();
 
-  const handleGoogleSignIn = async () => {
-    setError(null);
-    setLoading(true);
-    try {
-      const demoToken = "google-demo-token";
-      login(demoToken);
-      await new Promise((r) => setTimeout(r, 1500));
-      navigate(`/${ROUTES.APP}`);
-    } catch (err) {
-      setError(err?.message ?? "Sign-in failed");
-    } finally {
-      setLoading(false);
-    }
-  };
+  const googleLogin = useGoogleLogin({
+    flow: "auth-code", // we want an auth code to exchange on backend
+    onSuccess: async (codeResponse) => {
+      setError(null);
+      setLoading(true);
+
+      try {
+        console.log("Google code response:", codeResponse);
+        const response = await googleSignInHandler(codeResponse.code);
+
+        localStorage.setItem("accessToken", response.access_token);
+        localStorage.setItem("user", JSON.stringify(response.user));
+        login(response.access_token);
+
+        navigate(`/${ROUTES.APP}`);
+      } catch (err) {
+        console.error(err);
+        setError(err?.message ?? "Sign-in failed");
+      } finally {
+        setLoading(false);
+      }
+    },
+  });
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-bg to-elevated flex items-center justify-center p-4 transition-colors duration-300 font-sans">
@@ -69,7 +80,6 @@ export default function SignIn() {
                 </div>
               </div>
             </div>
-
             <div className="text-center mb-6">
               <h2 className="text-2xl font-bold mb-2 text-fg">Welcome back</h2>
               <p className="text-sm text-muted mb-1">
@@ -79,9 +89,8 @@ export default function SignIn() {
                 We only request the minimum scopes needed
               </p>
             </div>
-
             <button
-              onClick={handleGoogleSignIn}
+              onClick={googleLogin}
               disabled={loading}
               onMouseEnter={() => setButtonHovered(true)}
               onMouseLeave={() => setButtonHovered(false)}
@@ -124,7 +133,6 @@ export default function SignIn() {
                 </div>
               )}
             </button>
-
             {error && (
               <div className="mt-4 p-3 bg-error-bg border-2 border-error-border rounded-lg animate-shake">
                 <p className="text-sm text-error-text text-center font-medium">
@@ -132,7 +140,6 @@ export default function SignIn() {
                 </p>
               </div>
             )}
-
             <div className="mt-6 flex items-center justify-center gap-6 text-xs text-muted">
               <div className="flex items-center gap-1.5 transition-colors hover:text-accent">
                 <Shield className="w-4 h-4" />
@@ -144,7 +151,6 @@ export default function SignIn() {
                 <span>Fast</span>
               </div>
             </div>
-
             <p className="mt-6 text-xs text-center text-muted/70 leading-relaxed px-2">
               By continuing you agree to our Terms of Service. We respect your
               privacy and will not share your information.
