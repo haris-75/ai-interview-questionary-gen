@@ -98,7 +98,7 @@ export default function ShareResume() {
           />
           <label
             htmlFor="resume-upload"
-            className={`cursor-pointer block ${
+            className={`cursor-pointer block sm:min-h-[300px] flex flex-col justify-center ${
               loading ? "opacity-60 pointer-events-none" : ""
             }`}
           >
