@@ -12,10 +12,10 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import ROUTES from "../routes";
-import { HOME_BENEFITS, HOME_FEATURES } from "../constants";
+import { HOME_BENEFITS, HOME_FEATURES, HOW_IT_WORKS_STEPS } from "../constants";
 
 const HeroSection = ({ onNavigate }) => (
-  <section className="relative z-10 max-w-6xl mx-auto px-6 py-16 text-center">
+  <section className="relative z-10 max-w-6xl mx-auto xs:px-6 px-4 lg:py-16 xs:py-14 py-12 text-center">
     <div className="relative">
       <div className="absolute inset-0 bg-accent/20 blur-xl opacity-50 animate-pulse" />
       <h1 className="text-6xl md:text-8xl font-black relative text-fg">
@@ -84,7 +84,7 @@ const FeaturesSection = () => {
   const [hoveredFeature, setHoveredFeature] = useState(null);
 
   return (
-    <section className="relative z-10 max-w-6xl mx-auto px-6 py-20">
+    <section className="relative z-10 max-w-6xl mx-auto xs:px-6 px-4 lg:py-20 xs:py-16 py-12">
       <header className="text-center mb-16">
         <h3 className="text-3xl md:text-4xl font-bold text-fg mb-4">
           Everything You Need to Ace Interviews
@@ -143,76 +143,57 @@ const FeaturesSection = () => {
 };
 
 const HowItWorksSection = () => (
-  <section className="relative z-10 max-w-6xl mx-auto px-6 py-20">
-    <div className="bg-surface rounded-3xl border-2 border-border p-12 shadow-xl">
-      <header className="text-center mb-12">
-        <h3 className="text-3xl md:text-4xl font-bold text-fg mb-4">
+  <section className="relative z-10 max-w-6xl mx-auto xs:px-6 px-4 lg:py-20 xs:py-16 py-12">
+    <div className="bg-surface rounded-3xl border-2 border-border lg:p-12 sm:p-9 p-8 shadow-xl">
+      <header className="text-center md:mb-12 sm:mb-10 mb-8">
+        <h3 className="text-3xl md:text-4xl sm:text-3xl text-2xl font-bold text-fg mb-4">
           How It Works
         </h3>
-        <p className="text-lg text-muted">
+        <p className="sm:text-lg text-base text-muted">
           Two simple ways to generate interview questions
         </p>
       </header>
 
       <div className="grid md:grid-cols-2 gap-8">
-        <article className="p-8 rounded-2xl bg-elevated border-2 border-border hover:border-accent transition-all duration-300">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 rounded-lg bg-accent/20 flex items-center justify-center text-accent font-bold">
-              1
+        {HOW_IT_WORKS_STEPS.map((step, index) => (
+          <article
+            key={step.title}
+            className="lg:p-8 md:p-6 p-5 rounded-2xl bg-elevated border-2 border-border hover:border-accent transition-all duration-300"
+          >
+            <div className="flex items-center gap-3 sm:mb-6 mb-4">
+              <div className="sm:w-10 sm:h-10 w-8 h-8 rounded-lg bg-accent/20 flex items-center justify-center text-accent font-bold">
+                {index + 1}
+              </div>
+              <h4 className="sm:text-2xl xs:text-xl text-lg font-bold text-fg">
+                {step.title}
+              </h4>
             </div>
-            <h4 className="text-2xl font-bold text-fg">From Resume</h4>
-          </div>
 
-          <div className="space-y-4">
-            <div className="flex gap-3">
-              <CheckCircle2 className="w-5 h-5 text-accent flex-shrink-0 mt-1" />
-              <p className="text-muted">Upload candidate's resume (PDF/DOCX)</p>
+            <div className="space-y-4">
+              {step.items.map((item) => (
+                <div key={item} className="flex gap-3 items-center">
+                  <CheckCircle2 className="xs:w-5 xs:h-5 w-4 h-4 text-accent flex-shrink-0" />
+                  <p className="text-muted lg:text-base md:text-sm sm:text-base xs:text-sm text-xs">
+                    {item}
+                  </p>
+                </div>
+              ))}
             </div>
-            <div className="flex gap-3">
-              <CheckCircle2 className="w-5 h-5 text-accent flex-shrink-0 mt-1" />
-              <p className="text-muted">AI analyzes experience and skills</p>
-            </div>
-            <div className="flex gap-3">
-              <CheckCircle2 className="w-5 h-5 text-accent flex-shrink-0 mt-1" />
-              <p className="text-muted">Get tailored questions instantly</p>
-            </div>
-          </div>
-        </article>
-
-        <article className="p-8 rounded-2xl bg-elevated border-2 border-border hover:border-accent transition-all duration-300">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 rounded-lg bg-accent/20 flex items-center justify-center text-accent font-bold">
-              2
-            </div>
-            <h4 className="text-2xl font-bold text-fg">Custom Criteria</h4>
-          </div>
-
-          <div className="space-y-4">
-            <div className="flex gap-3">
-              <CheckCircle2 className="w-5 h-5 text-accent flex-shrink-0 mt-1" />
-              <p className="text-muted">Enter role, experience level, skills</p>
-            </div>
-            <div className="flex gap-3">
-              <CheckCircle2 className="w-5 h-5 text-accent flex-shrink-0 mt-1" />
-              <p className="text-muted">Specify years of experience needed</p>
-            </div>
-            <div className="flex gap-3">
-              <CheckCircle2 className="w-5 h-5 text-accent flex-shrink-0 mt-1" />
-              <p className="text-muted">Generate role-specific questions</p>
-            </div>
-          </div>
-        </article>
+          </article>
+        ))}
       </div>
 
-      <div className="mt-12 p-8 rounded-2xl bg-accent/5 border-2 border-accent/20">
-        <h4 className="text-xl font-bold text-fg mb-6 text-center">
+      <div className="md:mt-12 sm:mt-10 mt-8 lg:p-8 md:p-6 p-5 rounded-2xl bg-accent/5 border-2 border-accent/20">
+        <h4 className="sm:text-2xl xs:text-xl text-lg font-bold text-fg mb-6 text-center">
           What You Can Do Next
         </h4>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid md:grid-cols-2 gap-4">
           {HOME_BENEFITS.map((benefit) => (
             <div key={benefit} className="flex items-center gap-2 text-fg">
-              <CheckCircle2 className="w-5 h-5 text-accent flex-shrink-0" />
-              <span className="font-medium">{benefit}</span>
+              <CheckCircle2 className="xs:w-5 xs:h-5 w-4 h-4 text-accent flex-shrink-0" />
+              <span className="font-medium lg:text-base md:text-sm sm:text-base xs:text-sm text-xs">
+                {benefit}
+              </span>
             </div>
           ))}
         </div>
@@ -222,7 +203,7 @@ const HowItWorksSection = () => (
 );
 
 const CtaSection = () => (
-  <section className="relative z-10 max-w-4xl mx-auto px-6 py-20">
+  <section className="relative z-10 max-w-4xl mx-auto xs:px-6 px-4 lg:py-20 xs:py-16 py-12">
     <div className="relative overflow-hidden rounded-3xl bg-accent p-12 text-center shadow-2xl">
       <div className="absolute inset-0 bg-gradient-to-br from-accent to-accent/80" />
 

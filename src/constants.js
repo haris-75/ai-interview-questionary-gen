@@ -332,3 +332,22 @@ export const HOME_BENEFITS = [
   "Save hours of prep time",
   "Standardized interview process",
 ];
+
+export const HOW_IT_WORKS_STEPS = [
+  {
+    title: "From Resume",
+    items: [
+      "Upload candidate's resume (PDF/DOCX)",
+      "AI analyzes experience and skills",
+      "Get tailored questions instantly",
+    ],
+  },
+  {
+    title: "Custom Criteria",
+    items: [
+      "Enter role, experience level, skills",
+      "Specify years of experience needed",
+      "Generate role-specific questions",
+    ],
+  },
+];

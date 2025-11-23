@@ -40,6 +40,12 @@ span {
   --color-status-view-text: #065f46;
 
   --color-main: #ffffffe6;
+
+  /* Custom breakpoints */
+  --breakpoint-xxs: 375px;
+  --breakpoint-xs: 450px;
+  --breakpoint-xsmd: 620px;
+  --breakpoint-mdlg: 892px;
 }
 
 @layer theme {
