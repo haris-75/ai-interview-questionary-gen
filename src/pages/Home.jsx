@@ -86,10 +86,10 @@ const FeaturesSection = () => {
   return (
     <section className="relative z-10 max-w-6xl mx-auto xs:px-6 px-4 lg:py-20 xs:py-16 py-12">
       <header className="text-center mb-16">
-        <h3 className="text-3xl md:text-4xl font-bold text-fg mb-4">
+        <h3 className="text-3xl md:text-4xl sm:text-3xl text-2xl font-bold text-fg mb-4">
           Everything You Need to Ace Interviews
         </h3>
-        <p className="text-lg text-muted max-w-2xl mx-auto">
+        <p className="sm:text-lg text-base text-muted max-w-2xl mx-auto">
           Powerful features designed to streamline your hiring process from
           start to finish
         </p>
@@ -101,7 +101,7 @@ const FeaturesSection = () => {
             key={feature.title}
             onMouseEnter={() => setHoveredFeature(index)}
             onMouseLeave={() => setHoveredFeature(null)}
-            className="group relative p-8 rounded-2xl bg-surface border-2 border-border hover:border-accent transition-all duration-300 hover:shadow-xl cursor-pointer"
+            className="group relative sm:p-8 p-6 rounded-2xl bg-surface border-2 border-border hover:border-accent transition-all duration-300 hover:shadow-xl cursor-pointer"
             style={{
               animation: `slideUp 0.6s ease-out`,
               animationDelay: `${index * 0.1}s`,
@@ -116,22 +116,22 @@ const FeaturesSection = () => {
 
             <div className="relative">
               <div
-                className={`w-14 h-14 rounded-xl bg-accent/10 flex items-center justify-center mb-5 transition-all duration-300 ${
+                className={`sm:w-14 sm:h-14 w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center sm:mb-5 mb-3 transition-all duration-300 ${
                   hoveredFeature === index ? "scale-110 bg-accent" : ""
                 }`}
               >
                 <feature.icon
-                  className={`w-7 h-7 transition-colors duration-300 ${
+                  className={`sm:w-7 sm:h-7 w-5 h-5  transition-colors duration-300 ${
                     hoveredFeature === index ? "text-onaccent" : "text-accent"
                   }`}
                 />
               </div>
 
-              <h4 className="text-xl font-bold text-fg mb-3">
+              <h4 className="sm:text-xl text-lg font-bold text-fg mb-3">
                 {feature.title}
               </h4>
 
-              <p className="text-muted leading-relaxed">
+              <p className="text-sm sm:text-base text-muted leading-relaxed">
                 {feature.description}
               </p>
             </div>
@@ -204,18 +204,18 @@ const HowItWorksSection = () => (
 
 const CtaSection = () => (
   <section className="relative z-10 max-w-4xl mx-auto xs:px-6 px-4 lg:py-20 xs:py-16 py-12">
-    <div className="relative overflow-hidden rounded-3xl bg-accent p-12 text-center shadow-2xl">
+    <div className="relative overflow-hidden rounded-3xl bg-accent lg:p-12 xs:p-10 p-8 text-center shadow-2xl">
       <div className="absolute inset-0 bg-gradient-to-br from-accent to-accent/80" />
 
       <div className="relative z-10">
-        <h3 className="text-3xl md:text-4xl font-bold text-onaccent mb-4">
+        <h3 className="text-2xl xs:text-3xl md:text-4xl font-bold text-onaccent mb-4">
           Ready to Transform Your Interview Process?
         </h3>
-        <p className="text-lg text-onaccent/90 mb-8 max-w-2xl mx-auto">
+        <p className="text-sm xs:text-base md:text-lg text-onaccent/90 xs:mb-8 mb-5 max-w-2xl mx-auto">
           Join hundreds of hiring managers who are saving time and making better
           hiring decisions with Interro-AI
         </p>
-        <button className="px-10 py-4 rounded-xl bg-main text-fg font-bold text-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 inline-flex items-center gap-2">
+        <button className="px-10 py-4 rounded-xl bg-main text-fg font-bold text-sm xs:text-base md:text-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 inline-flex items-center gap-2">
           Get Started Free
           <ChevronRight className="w-5 h-5" />
         </button>
