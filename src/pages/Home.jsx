@@ -15,20 +15,20 @@ import ROUTES from "../routes";
 import { HOME_BENEFITS, HOME_FEATURES, HOW_IT_WORKS_STEPS } from "../constants";
 
 const HeroSection = ({ onNavigate }) => (
-  <section className="relative z-10 max-w-6xl mx-auto xs:px-6 px-4 lg:py-16 xs:py-14 py-12 text-center">
+  <section className="relative z-10 max-w-6xl mx-auto xs:px-6 px-4 lg:py-16 md:py-14 xsmd:py-12 py-10 text-center">
     <div className="relative">
       <div className="absolute inset-0 bg-accent/20 blur-xl opacity-50 animate-pulse" />
-      <h1 className="text-6xl md:text-8xl font-black relative text-fg">
+      <h1 className="text-5xl xsmd:text-6xl md:text-8xl font-black relative text-fg">
         /interro-ai
       </h1>
     </div>
     <div className="text-center max-w-4xl mx-auto">
-      <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 text-accent text-sm font-semibold mb-8 animate-fade-in">
+      <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 text-accent text-sm font-semibold md:mb-8 xsmd:mb-6 mb-4 animate-fade-in">
         <Zap className="w-4 h-4" />
         AI-Powered Interview Assistant
       </div>
 
-      <h2 className="text-5xl md:text-6xl font-black text-fg mb-6 leading-tight animate-slide-up">
+      <h2 className="text-3xl xsmd:text-5xl md:text-6xl font-black text-fg md:mb-6 xsmd:mb-5 mb-4 leading-tight animate-slide-up">
         Generate Role-Specific Interview Questions in{" "}
         <span className="relative inline-block">
           <span className="relative z-10">Seconds</span>
@@ -37,7 +37,7 @@ const HeroSection = ({ onNavigate }) => (
       </h2>
 
       <p
-        className="text-xl text-muted mb-10 max-w-2xl mx-auto animate-slide-up"
+        className="md:text-xl xsmd:text-lg text-sm text-muted md:mb-10 xsmd:mb-8 mb-6 max-w-2xl mx-auto animate-slide-up"
         style={{ animationDelay: "0.1s" }}
       >
         Create comprehensive interview questions with scoring rubrics from
@@ -50,30 +50,30 @@ const HeroSection = ({ onNavigate }) => (
         style={{ animationDelay: "0.2s" }}
       >
         <button
-          className="group px-8 py-4 rounded-xl bg-accent text-onaccent font-bold text-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 flex items-center gap-2"
+          className="group xsmd:px-8 px-6 xsmd:py-4 py-3 rounded-xl bg-accent text-onaccent font-bold xsmd:text-lg text-base hover:shadow-2xl transition-all duration-300 hover:scale-105 flex items-center gap-2"
           onClick={onNavigate}
         >
           Start Generating Questions
-          <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          <ArrowRight className="xsmd:w-5 xsmd:h-5 w-4 h-4 group-hover:translate-x-1 transition-transform" />
         </button>
-        <button className="px-8 py-4 rounded-xl bg-surface border-2 border-border text-fg font-bold text-lg hover:border-accent transition-all duration-300 flex items-center gap-2">
+        <button className="xsmd:px-8 px-6 xsmd:py-4 py-3 rounded-xl bg-surface border-2 border-border text-fg font-bold xsmd:text-lg text-base hover:border-accent transition-all duration-300 flex items-center gap-2">
           Watch Demo
-          <Eye className="w-5 h-5" />
+          <Eye className="xsmd:w-5 xsmd:h-5 w-4 h-4" />
         </button>
       </div>
 
-      <div className="flex items-center justify-center gap-8 mt-12 text-sm text-muted">
+      <div className="flex items-center justify-center gap-8 md:mt-12 xsmd:mt-10 mt-8 text-sm text-muted">
         <div className="flex items-center gap-2">
           <Shield className="w-5 h-5 text-accent" />
-          <span>Secure & Private</span>
+          <span className="text-xs xs:text-sm">Secure & Private</span>
         </div>
         <div className="flex items-center gap-2">
           <Zap className="w-5 h-5 text-accent" />
-          <span>Instant Results</span>
+          <span className="text-xs xs:text-sm">Instant Results</span>
         </div>
         <div className="flex items-center gap-2">
           <Users className="w-5 h-5 text-accent" />
-          <span>Team Collaboration</span>
+          <span className="text-xs xs:text-sm">Team Collaboration</span>
         </div>
       </div>
     </div>

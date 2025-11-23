@@ -64,12 +64,12 @@ export default function Navbar() {
                 Get Started
               </button>
             )}
-            {ThemeToggle && <ThemeToggle />}
+            <ThemeToggle />
           </div>
 
           {/* Mobile Menu Button */}
           <div className="flex items-center gap-3 sm:hidden">
-            {ThemeToggle && <ThemeToggle />}
+            <ThemeToggle />
             <button
               onClick={toggleMobileMenu}
               className="p-2 rounded-lg hover:bg-surface transition-colors"

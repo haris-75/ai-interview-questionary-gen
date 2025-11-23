@@ -3,8 +3,8 @@ import { useTheme } from "../theme/ThemeContext";
 
 const ThemeToggle = ({ size = "lg" }) => {
   const { toggleTheme, isDark } = useTheme();
-  const paddingClass = size === "sm" ? "p-2" : "p-3";
-  const iconSizeClass = size === "sm" ? "w-5 h-5" : "w-6 h-6";
+  const paddingClass = size === "sm" ? "p-2" : "xsmd:p-3 p-2";
+  const iconSizeClass = size === "sm" ? "w-5 h-5" : "xsmd:w-6 xsmd:h-6 w-5 h-5";
   return (
     <button
       onClick={toggleTheme}
