@@ -10,7 +10,11 @@ import { useGoogleLogin } from "@react-oauth/google";
 
 function GoogleLogo() {
   return (
-    <svg viewBox="0 0 533.5 544.3" className="w-5 h-5" aria-hidden>
+    <svg
+      viewBox="0 0 533.5 544.3"
+      className="xs:w-5 xs:h-5 w-4 h-4"
+      aria-hidden
+    >
       <path
         d="M533.5 278.4c0-17.4-1.6-34.1-4.6-50.4H272v95.5h146.9c-6.3 34-25.1 62.8-53.5 82.1v68.2h86.4c50.6-46.6 81.7-115.4 81.7-195.4z"
         fill="#4285F4"
@@ -62,9 +66,33 @@ export default function SignIn() {
     },
   });
 
+  useGoogleLogin({
+    flow: "auth-code",
+    onSuccess: async (codeResponse) => {
+      setError(null);
+      setLoading(true);
+
+      try {
+        console.log("Google code response:", codeResponse);
+        const response = await googleSignInHandler(codeResponse.code);
+
+        localStorage.setItem("accessToken", response.access_token);
+        localStorage.setItem("user", JSON.stringify(response.user));
+        login(response.access_token);
+
+        navigate(`/${ROUTES.APP}`);
+      } catch (err) {
+        console.error(err);
+        setError(err?.message ?? "Sign-in failed");
+      } finally {
+        setLoading(false);
+      }
+    },
+  });
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-bg to-elevated flex items-center justify-center p-4 transition-colors duration-300 font-sans">
-      <div className="min-h-screen flex items-center justify-center p-4 ">
+      <div className=" flex items-center justify-center p-4 ">
         <div className="max-w-md w-full relative z-10">
           <HomeHeader />
 
@@ -94,7 +122,7 @@ export default function SignIn() {
               disabled={loading}
               onMouseEnter={() => setButtonHovered(true)}
               onMouseLeave={() => setButtonHovered(false)}
-              className="w-full group relative overflow-hidden rounded-xl p-4 font-semibold transition-all duration-300 shadow-md hover:shadow-xl border-2 border-border bg-main hover:border-accent disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:border-border focus:outline-none focus:ring-4 focus:ring-accent/20"
+              className="w-full group relative overflow-hidden rounded-xl xs:p-4 p-3 font-semibold transition-all duration-300 shadow-md hover:shadow-xl border-2 border-border bg-main hover:border-accent disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:border-border focus:outline-none focus:ring-4 focus:ring-accent/20"
               aria-label="Sign in with Google"
             >
               <div
@@ -110,18 +138,18 @@ export default function SignIn() {
                   } ${buttonHovered ? "scale-110" : ""}`}
                 >
                   {loading ? (
-                    <div className="w-5 h-5 border-3 border-accent border-t-transparent rounded-full animate-spin" />
+                    <div className="xs:w-5 xs:h-5 w-4 h-4 border-3 border-accent border-t-transparent rounded-full animate-spin" />
                   ) : (
                     <GoogleLogo />
                   )}
                 </span>
 
-                <span className="text-base text-fg font-semibold">
+                <span className="xs:text-base text-xs text-fg font-semibold">
                   {loading ? "Signing you in..." : "Continue with Google"}
                 </span>
 
                 <ChevronRight
-                  className={`w-5 h-5 text-muted transition-all duration-300 ${
+                  className={`xs:w-5 xs:h-5 w-4 h-4 text-muted transition-all duration-300 ${
                     buttonHovered && !loading ? "translate-x-1 text-accent" : ""
                   }`}
                 />
