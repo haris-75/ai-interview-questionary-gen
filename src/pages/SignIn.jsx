@@ -66,6 +66,7 @@ export default function SignIn() {
     },
   });
 
+  // Todo: We will use this function when actual API is ready
   useGoogleLogin({
     flow: "auth-code",
     onSuccess: async (codeResponse) => {
@@ -89,6 +90,38 @@ export default function SignIn() {
       }
     },
   });
+
+  const sampleGoogleLogin = async () => {
+    setError(null);
+    setLoading(true);
+
+    try {
+      // Mock user data
+      const response = {
+        access_token: "sample_access_token",
+        user: { name: "John Doe", email: "johndoe@gmail.com" },
+      };
+
+      localStorage.setItem("accessToken", response.access_token);
+      localStorage.setItem("user", JSON.stringify(response.user));
+      login(response.access_token);
+
+      navigate(`/${ROUTES.APP}`);
+    } catch (err) {
+      console.error(err);
+      setError(err?.message ?? "Sign-in failed");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const signInMouseEnter = () => {
+    setButtonHovered(true);
+  };
+
+  const signInMouseLeave = () => {
+    setButtonHovered(false);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-bg to-elevated flex items-center justify-center p-4 transition-colors duration-300 font-sans">
@@ -118,10 +151,10 @@ export default function SignIn() {
               </p>
             </div>
             <button
-              onClick={googleLogin}
+              onClick={sampleGoogleLogin}
               disabled={loading}
-              onMouseEnter={() => setButtonHovered(true)}
-              onMouseLeave={() => setButtonHovered(false)}
+              onMouseEnter={signInMouseEnter}
+              onMouseLeave={signInMouseLeave}
               className="w-full group relative overflow-hidden rounded-xl xs:p-4 p-3 font-semibold transition-all duration-300 shadow-md hover:shadow-xl border-2 border-border bg-main hover:border-accent disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:border-border focus:outline-none focus:ring-4 focus:ring-accent/20"
               aria-label="Sign in with Google"
             >
