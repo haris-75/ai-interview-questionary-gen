@@ -127,18 +127,18 @@ export default function ShareDetails() {
     <div className="lg:min-w-2xl md:min-w-xl max-w-6xl mx-auto py-8 px-4">
       <button
         onClick={() => navigate(-1)}
-        className="mb-6 font-semibold flex items-center text-accent hover:opacity-90 transition-opacity"
+        className="xs:mb-6 mb-4 font-semibold flex items-center text-accent hover:opacity-90 transition-opacity"
         aria-label="Go back"
       >
         ← Back
       </button>
 
-      <div className="rounded-2xl shadow-xl p-8 bg-surface border border-border">
-        <header className="mb-8">
-          <h2 className="text-3xl font-bold mb-2 text-fg">
+      <div className="rounded-2xl shadow-xl xs:p-8 p-6 bg-surface border border-border">
+        <header className="xs:mb-8 mb-6">
+          <h2 className="xs:text-3xl text-[22px] font-bold mb-2 text-fg">
             Tell us about the role
           </h2>
-          <p className="text-muted">
+          <p className="text-muted xs:text-base text-sm">
             Provide details to generate relevant interview questions
           </p>
         </header>
@@ -165,17 +165,17 @@ export default function ShareDetails() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-4 rounded-lg font-semibold transition-all flex items-center justify-center bg-accent text-onaccent hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full xs:py-4 py-3 rounded-lg font-semibold transition-all flex items-center justify-center bg-accent text-onaccent hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? (
               <>
-                <span className="inline-block w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
+                <span className="inline-block xs:w-5 xs:h-5 w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
                 Generating...
               </>
             ) : (
               <>
                 Generate Questions
-                <ChevronRight className="w-5 h-5 ml-2" />
+                <ChevronRight className="xs:w-5 xs:h-5 w-4 h-4 ml-2" />
               </>
             )}
           </button>

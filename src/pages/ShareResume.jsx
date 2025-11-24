@@ -68,15 +68,17 @@ export default function ShareResume() {
     <div className="lg:min-w-2xl md:min-w-xl max-w-6xl mx-auto py-8">
       <button
         onClick={() => navigate(-1)}
-        className="mb-6 font-semibold flex items-center text-accent hover:opacity-90"
+        className="xs:mb-6 mb-4 font-semibold flex items-center text-accent hover:opacity-90"
       >
         ← Back
       </button>
 
-      <div className="rounded-2xl shadow-xl p-8 bg-surface border border-border">
-        <div className="mb-8 text-center">
-          <h2 className="text-3xl font-bold mb-2 text-fg">Upload Resume</h2>
-          <p className="text-muted">
+      <div className="rounded-2xl shadow-xl xs:p-8 p-6 bg-surface border border-border">
+        <div className="xs:mb-8 mb-6 text-center">
+          <h2 className="xs:text-3xl text-2xl font-bold mb-2 text-fg">
+            Upload Resume
+          </h2>
+          <p className="text-muted xs:text-base text-sm">
             We'll analyze the resume and generate relevant questions
           </p>
         </div>
@@ -87,7 +89,7 @@ export default function ShareResume() {
           </div>
         )}
 
-        <div className="border-4 border-dashed rounded-xl p-12 text-center transition-colors border-border hover:border-accent/70 relative">
+        <div className="border-4 border-dashed rounded-xl xs:p-12 p-6 text-center transition-colors border-border hover:border-accent/70 relative">
           <input
             type="file"
             id="resume-upload"
@@ -104,18 +106,20 @@ export default function ShareResume() {
           >
             <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4 bg-accent/10">
               {loading ? (
-                <Loader2 className="w-10 h-10 text-accent animate-spin" />
+                <Loader2 className="xs:w-10 xs:h-10 w-8 h-8 text-accent animate-spin" />
               ) : (
-                <FileText className="w-10 h-10 text-accent" />
+                <FileText className="xs:w-10 xs:h-10 w-8 h-8 text-accent" />
               )}
             </div>
-            <h3 className="text-xl font-semibold mb-2 text-fg">
+            <h3 className="xs:text-xl text-lg font-semibold mb-2 text-fg">
               {loading ? "Analyzing Resume..." : "Drop your resume here"}
             </h3>
             {!loading && (
               <>
-                <p className="mb-4 text-muted">or click to browse</p>
-                <p className="text-sm text-muted">
+                <p className="mb-4 text-muted xs:text-sm text-xs">
+                  or click to browse
+                </p>
+                <p className="xs:text-sm text-xs text-muted">
                   Supports PDF, DOC, DOCX (Max 5MB)
                 </p>
               </>

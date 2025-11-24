@@ -217,7 +217,7 @@ export default function InterviewQuestions() {
       <div className="rounded-2xl shadow-lg p-6 mb-6 bg-surface border border-border">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-bold mb-2 text-fg">
+            <h1 className="xs:text-3xl text-2xl font-bold mb-2 text-fg">
               {isSharedView
                 ? "Shared Interview Feedback"
                 : "Interview Questions"}
@@ -323,7 +323,7 @@ export default function InterviewQuestions() {
                       className="mt-1 mr-3"
                     />
                     <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-1">
+                      <div className="flex items-start gap-2 mb-1">
                         <span className="font-bold text-accent">{r.score}</span>
                         <span className="text-fg">{r.desc}</span>
                       </div>
@@ -365,7 +365,7 @@ export default function InterviewQuestions() {
       {/* Save Section */}
       {!isSharedView && (
         <div className="mt-8 rounded-xl shadow-lg p-6 bg-surface border border-border">
-          <div className="flex items-center justify-between">
+          <div className="flex xsmd:items-center justify-between xsmd:flex-row flex-col gap-4 items-start">
             <div>
               <h3 className="text-xl font-bold mb-1 text-fg">
                 Interview Complete?
