@@ -106,11 +106,13 @@ export default function SignIn() {
       localStorage.setItem("user", JSON.stringify(response.user));
       login(response.access_token);
 
-      navigate(`/${ROUTES.APP}`);
+      setTimeout(() => {
+        setLoading(false);
+        navigate(`/${ROUTES.APP}`);
+      }, 1000);
     } catch (err) {
       console.error(err);
       setError(err?.message ?? "Sign-in failed");
-    } finally {
       setLoading(false);
     }
   };
