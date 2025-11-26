@@ -5,8 +5,8 @@ import HomeHeader from "../components/HomeHeader";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../routes";
 import { useAuth } from "../auth/AuthContext";
-import { googleSignInHandler } from "../api";
-import { useGoogleLogin } from "@react-oauth/google";
+// import { googleSignInHandler } from "../api";
+// import { useGoogleLogin } from "@react-oauth/google";
 
 function GoogleLogo() {
   return (
@@ -42,54 +42,54 @@ export default function SignIn() {
   const navigate = useNavigate();
   const { login } = useAuth();
 
-  const googleLogin = useGoogleLogin({
-    flow: "auth-code",
-    onSuccess: async (codeResponse) => {
-      setError(null);
-      setLoading(true);
+  // const googleLogin = useGoogleLogin({
+  //   flow: "auth-code",
+  //   onSuccess: async (codeResponse) => {
+  //     setError(null);
+  //     setLoading(true);
 
-      try {
-        console.log("Google code response:", codeResponse);
-        const response = await googleSignInHandler(codeResponse.code);
+  //     try {
+  //       console.log("Google code response:", codeResponse);
+  //       const response = await googleSignInHandler(codeResponse.code);
 
-        localStorage.setItem("accessToken", response.access_token);
-        localStorage.setItem("user", JSON.stringify(response.user));
-        login(response.access_token);
+  //       localStorage.setItem("accessToken", response.access_token);
+  //       localStorage.setItem("user", JSON.stringify(response.user));
+  //       login(response.access_token);
 
-        navigate(`/${ROUTES.APP}`);
-      } catch (err) {
-        console.error(err);
-        setError(err?.message ?? "Sign-in failed");
-      } finally {
-        setLoading(false);
-      }
-    },
-  });
+  //       navigate(`/${ROUTES.APP}`);
+  //     } catch (err) {
+  //       console.error(err);
+  //       setError(err?.message ?? "Sign-in failed");
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   },
+  // });
 
   // Todo: We will use this function when actual API is ready
-  useGoogleLogin({
-    flow: "auth-code",
-    onSuccess: async (codeResponse) => {
-      setError(null);
-      setLoading(true);
+  // useGoogleLogin({
+  //   flow: "auth-code",
+  //   onSuccess: async (codeResponse) => {
+  //     setError(null);
+  //     setLoading(true);
 
-      try {
-        console.log("Google code response:", codeResponse);
-        const response = await googleSignInHandler(codeResponse.code);
+  //     try {
+  //       console.log("Google code response:", codeResponse);
+  //       const response = await googleSignInHandler(codeResponse.code);
 
-        localStorage.setItem("accessToken", response.access_token);
-        localStorage.setItem("user", JSON.stringify(response.user));
-        login(response.access_token);
+  //       localStorage.setItem("accessToken", response.access_token);
+  //       localStorage.setItem("user", JSON.stringify(response.user));
+  //       login(response.access_token);
 
-        navigate(`/${ROUTES.APP}`);
-      } catch (err) {
-        console.error(err);
-        setError(err?.message ?? "Sign-in failed");
-      } finally {
-        setLoading(false);
-      }
-    },
-  });
+  //       navigate(`/${ROUTES.APP}`);
+  //     } catch (err) {
+  //       console.error(err);
+  //       setError(err?.message ?? "Sign-in failed");
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   },
+  // });
 
   const sampleGoogleLogin = async () => {
     setError(null);

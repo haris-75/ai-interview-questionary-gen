@@ -18,4 +18,6 @@ const formatTimeStamp = (timestamp) => {
     year: "numeric",
   });
 };
-export { getUserDetails, formatTimeStamp };
+const isDevMode = import.meta.env.MODE === "development";
+const useGoogleOAuth = Boolean(import.meta.env.VITE_GOOGLE_CLIENT_ID);
+export { getUserDetails, formatTimeStamp, isDevMode, useGoogleOAuth };
